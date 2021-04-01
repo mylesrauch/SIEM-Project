@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@models/*": ["models/*"],
+            "@routes/*": ["routes/*"],
+        }
+    }
+}
