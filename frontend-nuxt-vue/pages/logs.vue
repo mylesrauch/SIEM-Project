@@ -62,8 +62,6 @@
 
 <script>
 
-import axios from 'axios'
-
   export default {
         data: () => ({
       search:'',
@@ -90,16 +88,8 @@ import axios from 'axios'
       },
     }),
     
-    async asyncData() {
-    
-    const api = 'http://localhost:3000/all-logs'
-    // const logs = await fetch(api).then((response) => {
-    //   return response.json()
-    // }) 
-    const logs = await axios.get(api).then((response)  => {
-      return response.data
-    })
-    return { logs }
+    async fetch() {
+    this.logs = await this.$axios.$get("/api/all-logs");
     },
 
     watch: {
@@ -112,13 +102,18 @@ import axios from 'axios'
     },
 
     created () {
-      this.initialize()
+      this.pollData()
     },
 
     methods: {
-    
-      initialize () { 
-          this.logs = this.logs
+      async pollData() {
+        this.polling = setInterval(async () => {
+          this.$fetch();
+        }, 30000);
+      },
+    },
+      beforeUnmount() {
+        clearInterval(this.polling);
       },
 
       deleteItem (item) {
@@ -139,6 +134,5 @@ import axios from 'axios'
           this.editedIndex = -1
         })
       },
-    },
-  }
+    }
 </script>
