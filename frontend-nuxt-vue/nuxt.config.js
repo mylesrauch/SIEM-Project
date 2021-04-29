@@ -2,6 +2,10 @@
 // import axios from 'axios';
 // Vue.prototype.$http = axios;
 
+
+// import the API from localhost
+const API = 'http://localhost:3000/';
+
 export default {
   
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -40,10 +44,27 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    "/api/": {
+      target: `${API}/`,
+      pathRewrite: { "^/api/": "" }
+    },
+    "/api/all-logs": {
+      target: `${API}/all-logs`,
+      pathRewrite: { "^/api/all-logs": "" }
+    },
+    "/api/test": {
+      target: `${API}/test`,
+      pathRewrite: { "^/api/test": "" }
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
