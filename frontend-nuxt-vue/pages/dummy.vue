@@ -1,5 +1,5 @@
 <template>
-
+<div>stinki</div>
 </template>
 
 <script>
