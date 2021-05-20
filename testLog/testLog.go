@@ -1,10 +1,10 @@
-package testLog
+package main
 
 import (
 	"fmt"
 	"errors"
 	"syscall"
-	"https://golang.org/x/sys/windows"
+	"golang.org/x/sys/windows"
 )
 
 type Log struct {
